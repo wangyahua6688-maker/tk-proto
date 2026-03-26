@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package tk.v1;
+
+option go_package = "tk-proto/gen/go/tk/v1;tkv1";
+
+import "tk/v1/common_types.proto";
+
+// BusinessService 业务域服务。
+service BusinessService {
+  // HomeOverview 首页聚合：banner、广播、外链、金刚导航、分类等。
+  rpc HomeOverview(HomeOverviewRequest) returns (JsonDataReply);
+  // LotteryCategories 图库分类搜索。
+  rpc LotteryCategories(CategoryLibraryRequest) returns (JsonDataReply);
+  // LiveScenePage 开奖现场整页聚合接口（单接口返回整页数据）。
+  rpc LiveScenePage(IDRequest) returns (JsonDataReply);
+  rpc LotteryDashboard(IDRequest) returns (JsonDataReply);
+  rpc DrawHistory(DrawHistoryRequest) returns (JsonDataReply);
+  rpc DrawDetail(IDRequest) returns (JsonDataReply);
+  rpc ListCards(ListCardsRequest) returns (JsonDataReply);
+  rpc LotteryDetail(IDRequest) returns (JsonDataReply);
+  rpc LotteryHistory(IDRequest) returns (JsonDataReply);
+  rpc LotteryResults(IDRequest) returns (JsonDataReply);
+  rpc VoteRecord(VoteRecordRequest) returns (JsonDataReply);
+  rpc Vote(VoteRequest) returns (JsonDataReply);
+}

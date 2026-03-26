@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+package tk.v1;
+
+option go_package = "tk-proto/gen/go/tk/v1;tkv1";
+
+// JsonDataReply 统一响应结构。
+message JsonDataReply {
+  int32 code = 1;
+  string msg = 2;
+  string data_json = 3;
+}
+
+// 首页与分类库请求。
+message HomeOverviewRequest {}
+message CategoryLibraryRequest {
+  string keyword = 1;
+}
+
+// 论坛请求。
+message TopicListRequest {
+  int32 limit = 1;
+}
+message ForumTopicsRequest {
+  int32 limit = 1;
+  string feed = 2;
+  string keyword = 3;
+  string issue = 4;
+  int32 year = 5;
+}
+message ForumTopicDetailRequest {
+  uint64 post_id = 1;
+}
+message ForumAuthorHistoryRequest {
+  uint64 user_id = 1;
+  int32 limit = 2;
+  string issue = 3;
+  int32 year = 4;
+}
+message LotteryCommentGroupsRequest {
+  uint64 lottery_info_id = 1;
+}
+message ExpertBoardsRequest {
+  int32 limit = 1;
+  string lottery_code = 2;
+}
+
+// 开奖/图纸请求。
+message IDRequest {
+  uint64 id = 1;
+}
+message ListCardsRequest {
+  string category = 1;
+}
+message DrawHistoryRequest {
+  uint64 special_lottery_id = 1;
+  string order_mode = 2;
+  bool show_five = 3;
+  int32 limit = 4;
+}
+
+// 投票请求。
+message VoteRequest {
+  uint64 lottery_info_id = 1;
+  uint64 option_id = 2;
+  string device_id = 3;
+  string client_ip = 4;
+  string user_agent = 5;
+}
+message VoteRecordRequest {
+  uint64 lottery_info_id = 1;
+  string device_id = 2;
+  string client_ip = 3;
+  string user_agent = 4;
+}
+
+// 用户认证请求。
+message AuthSendCodeRequest {
+  string phone = 1;
+  string purpose = 2;
+}
+message AuthRegisterRequest {
+  string phone = 1;
+  string password = 2;
+  string sms_code = 3;
+  string nickname = 4;
+}
+message AuthPasswordLoginRequest {
+  string phone = 1;
+  string password = 2;
+}
+message AuthSMSLoginRequest {
+  string phone = 1;
+  string sms_code = 2;
+}
+message AuthProfileRequest {
+  string access_token = 1;
+}

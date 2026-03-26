@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package tk.v1;
+
+option go_package = "tk-proto/gen/go/tk/v1;tkv1";
+
+import "tk/v1/common_types.proto";
+
+// UserService 用户域服务（当前承载论坛能力，后续扩展账号能力）。
+service UserService {
+  // 兼容旧接口：论坛帖子列表。
+  rpc TopicList(TopicListRequest) returns (JsonDataReply);
+  // 论坛帖子列表（新接口，支持 feed/keyword 扩展）。
+  rpc ForumTopics(ForumTopicsRequest) returns (JsonDataReply);
+  // 论坛帖子详情（关联开奖、作者统计、评论分组）。
+  rpc ForumTopicDetail(ForumTopicDetailRequest) returns (JsonDataReply);
+  // 用户历史贴列表（按用户 + 期号 + 年份筛选）。
+  rpc ForumAuthorHistory(ForumAuthorHistoryRequest) returns (JsonDataReply);
+  // 高手推荐榜单。
+  rpc ExpertBoards(ExpertBoardsRequest) returns (JsonDataReply);
+
+  // 用户认证：短信验证码发送、注册、登录、资料查询。
+  rpc SendSMSCode(AuthSendCodeRequest) returns (JsonDataReply);
+  rpc RegisterByPhone(AuthRegisterRequest) returns (JsonDataReply);
+  rpc LoginByPassword(AuthPasswordLoginRequest) returns (JsonDataReply);
+  rpc LoginBySMS(AuthSMSLoginRequest) returns (JsonDataReply);
+  rpc Profile(AuthProfileRequest) returns (JsonDataReply);
+
+  // 彩种评论分组。
+  rpc LotteryCommentGroups(LotteryCommentGroupsRequest) returns (JsonDataReply);
+}
