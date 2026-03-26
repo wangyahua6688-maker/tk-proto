@@ -1,8 +1,6 @@
 module github.com/wangyahua6688-maker/tk-proto
 
-go 1.23
-
-toolchain go1.24.4
+go 1.24
 
 require (
 	google.golang.org/grpc v1.65.0
