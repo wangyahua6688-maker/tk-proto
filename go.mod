@@ -1,4 +1,4 @@
-module tk-proto
+module github.com/wangyahua6688-maker/tk-proto
 
 go 1.23
 
