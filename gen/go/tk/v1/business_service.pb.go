@@ -24,22 +24,22 @@ var File_tk_v1_business_service_proto protoreflect.FileDescriptor
 
 const file_tk_v1_business_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1ctk/v1/business_service.proto\x12\x05tk.v1\x1a\x18tk/v1/common_types.proto2\xe1\x05\n" +
+	"\x1ctk/v1/business_service.proto\x12\x05tk.v1\x1a\x18tk/v1/common_types.proto\x1a\x19tk/v1/lottery_types.proto2\x88\x06\n" +
 	"\x0fBusinessService\x12@\n" +
 	"\fHomeOverview\x12\x1a.tk.v1.HomeOverviewRequest\x1a\x14.tk.v1.JsonDataReply\x12H\n" +
 	"\x11LotteryCategories\x12\x1d.tk.v1.CategoryLibraryRequest\x1a\x14.tk.v1.JsonDataReply\x127\n" +
-	"\rLiveScenePage\x12\x10.tk.v1.IDRequest\x1a\x14.tk.v1.JsonDataReply\x12:\n" +
-	"\x10LotteryDashboard\x12\x10.tk.v1.IDRequest\x1a\x14.tk.v1.JsonDataReply\x12>\n" +
-	"\vDrawHistory\x12\x19.tk.v1.DrawHistoryRequest\x1a\x14.tk.v1.JsonDataReply\x124\n" +
+	"\rLiveScenePage\x12\x10.tk.v1.IDRequest\x1a\x14.tk.v1.JsonDataReply\x12B\n" +
+	"\x10LotteryDashboard\x12\x10.tk.v1.IDRequest\x1a\x1c.tk.v1.LotteryDashboardReply\x12D\n" +
+	"\vDrawHistory\x12\x19.tk.v1.DrawHistoryRequest\x1a\x1a.tk.v1.LotteryHistoryReply\x12=\n" +
 	"\n" +
-	"DrawDetail\x12\x10.tk.v1.IDRequest\x1a\x14.tk.v1.JsonDataReply\x12:\n" +
-	"\tListCards\x12\x17.tk.v1.ListCardsRequest\x1a\x14.tk.v1.JsonDataReply\x127\n" +
-	"\rLotteryDetail\x12\x10.tk.v1.IDRequest\x1a\x14.tk.v1.JsonDataReply\x128\n" +
-	"\x0eLotteryHistory\x12\x10.tk.v1.IDRequest\x1a\x14.tk.v1.JsonDataReply\x128\n" +
-	"\x0eLotteryResults\x12\x10.tk.v1.IDRequest\x1a\x14.tk.v1.JsonDataReply\x12<\n" +
+	"DrawDetail\x12\x10.tk.v1.IDRequest\x1a\x1d.tk.v1.LotteryDrawDetailReply\x12:\n" +
+	"\tListCards\x12\x17.tk.v1.ListCardsRequest\x1a\x14.tk.v1.JsonDataReply\x12<\n" +
+	"\rLotteryDetail\x12\x10.tk.v1.IDRequest\x1a\x19.tk.v1.LotteryDetailReply\x12>\n" +
+	"\x0eLotteryHistory\x12\x10.tk.v1.IDRequest\x1a\x1a.tk.v1.LotteryHistoryReply\x12=\n" +
+	"\x0eLotteryResults\x12\x10.tk.v1.IDRequest\x1a\x19.tk.v1.LotteryDetailReply\x12<\n" +
 	"\n" +
 	"VoteRecord\x12\x18.tk.v1.VoteRecordRequest\x1a\x14.tk.v1.JsonDataReply\x120\n" +
-	"\x04Vote\x12\x12.tk.v1.VoteRequest\x1a\x14.tk.v1.JsonDataReplyB\x1cZ\x1atk-proto/gen/go/tk/v1;tkv1b\x06proto3"
+	"\x04Vote\x12\x12.tk.v1.VoteRequest\x1a\x14.tk.v1.JsonDataReplyB;Z9github.com/wangyahua6688-maker/tk-proto/gen/go/tk/v1;tkv1b\x06proto3"
 
 var file_tk_v1_business_service_proto_goTypes = []any{
 	(*HomeOverviewRequest)(nil),    // 0: tk.v1.HomeOverviewRequest
@@ -50,6 +50,10 @@ var file_tk_v1_business_service_proto_goTypes = []any{
 	(*VoteRecordRequest)(nil),      // 5: tk.v1.VoteRecordRequest
 	(*VoteRequest)(nil),            // 6: tk.v1.VoteRequest
 	(*JsonDataReply)(nil),          // 7: tk.v1.JsonDataReply
+	(*LotteryDashboardReply)(nil),  // 8: tk.v1.LotteryDashboardReply
+	(*LotteryHistoryReply)(nil),    // 9: tk.v1.LotteryHistoryReply
+	(*LotteryDrawDetailReply)(nil), // 10: tk.v1.LotteryDrawDetailReply
+	(*LotteryDetailReply)(nil),     // 11: tk.v1.LotteryDetailReply
 }
 var file_tk_v1_business_service_proto_depIdxs = []int32{
 	0,  // 0: tk.v1.BusinessService.HomeOverview:input_type -> tk.v1.HomeOverviewRequest
@@ -67,13 +71,13 @@ var file_tk_v1_business_service_proto_depIdxs = []int32{
 	7,  // 12: tk.v1.BusinessService.HomeOverview:output_type -> tk.v1.JsonDataReply
 	7,  // 13: tk.v1.BusinessService.LotteryCategories:output_type -> tk.v1.JsonDataReply
 	7,  // 14: tk.v1.BusinessService.LiveScenePage:output_type -> tk.v1.JsonDataReply
-	7,  // 15: tk.v1.BusinessService.LotteryDashboard:output_type -> tk.v1.JsonDataReply
-	7,  // 16: tk.v1.BusinessService.DrawHistory:output_type -> tk.v1.JsonDataReply
-	7,  // 17: tk.v1.BusinessService.DrawDetail:output_type -> tk.v1.JsonDataReply
+	8,  // 15: tk.v1.BusinessService.LotteryDashboard:output_type -> tk.v1.LotteryDashboardReply
+	9,  // 16: tk.v1.BusinessService.DrawHistory:output_type -> tk.v1.LotteryHistoryReply
+	10, // 17: tk.v1.BusinessService.DrawDetail:output_type -> tk.v1.LotteryDrawDetailReply
 	7,  // 18: tk.v1.BusinessService.ListCards:output_type -> tk.v1.JsonDataReply
-	7,  // 19: tk.v1.BusinessService.LotteryDetail:output_type -> tk.v1.JsonDataReply
-	7,  // 20: tk.v1.BusinessService.LotteryHistory:output_type -> tk.v1.JsonDataReply
-	7,  // 21: tk.v1.BusinessService.LotteryResults:output_type -> tk.v1.JsonDataReply
+	11, // 19: tk.v1.BusinessService.LotteryDetail:output_type -> tk.v1.LotteryDetailReply
+	9,  // 20: tk.v1.BusinessService.LotteryHistory:output_type -> tk.v1.LotteryHistoryReply
+	11, // 21: tk.v1.BusinessService.LotteryResults:output_type -> tk.v1.LotteryDetailReply
 	7,  // 22: tk.v1.BusinessService.VoteRecord:output_type -> tk.v1.JsonDataReply
 	7,  // 23: tk.v1.BusinessService.Vote:output_type -> tk.v1.JsonDataReply
 	12, // [12:24] is the sub-list for method output_type
@@ -89,6 +93,7 @@ func file_tk_v1_business_service_proto_init() {
 		return
 	}
 	file_tk_v1_common_types_proto_init()
+	file_tk_v1_lottery_types_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

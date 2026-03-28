@@ -5,6 +5,7 @@ package tk.v1;
 option go_package = "github.com/wangyahua6688-maker/tk-proto/gen/go/tk/v1;tkv1";
 
 import "tk/v1/common_types.proto";
+import "tk/v1/lottery_types.proto";
 
 // BusinessService 业务域服务。
 service BusinessService {
@@ -14,13 +15,19 @@ service BusinessService {
   rpc LotteryCategories(CategoryLibraryRequest) returns (JsonDataReply);
   // LiveScenePage 开奖现场整页聚合接口（单接口返回整页数据）。
   rpc LiveScenePage(IDRequest) returns (JsonDataReply);
-  rpc LotteryDashboard(IDRequest) returns (JsonDataReply);
-  rpc DrawHistory(DrawHistoryRequest) returns (JsonDataReply);
-  rpc DrawDetail(IDRequest) returns (JsonDataReply);
+  // LotteryDashboard 使用真正的 typed response。
+  rpc LotteryDashboard(IDRequest) returns (LotteryDashboardReply);
+  // DrawHistory / LotteryHistory 共享同一套 typed 历史结构。
+  rpc DrawHistory(DrawHistoryRequest) returns (LotteryHistoryReply);
+  // DrawDetail 使用真正的 typed response。
+  rpc DrawDetail(IDRequest) returns (LotteryDrawDetailReply);
   rpc ListCards(ListCardsRequest) returns (JsonDataReply);
-  rpc LotteryDetail(IDRequest) returns (JsonDataReply);
-  rpc LotteryHistory(IDRequest) returns (JsonDataReply);
-  rpc LotteryResults(IDRequest) returns (JsonDataReply);
+  // LotteryDetail 彩票详情页使用 typed response。
+  rpc LotteryDetail(IDRequest) returns (LotteryDetailReply);
+  // LotteryHistory 共享历史开奖记录 typed response。
+  rpc LotteryHistory(IDRequest) returns (LotteryHistoryReply);
+  // LotteryResults 当前与 LotteryDetail 复用同一 typed 结构。
+  rpc LotteryResults(IDRequest) returns (LotteryDetailReply);
   rpc VoteRecord(VoteRecordRequest) returns (JsonDataReply);
   rpc Vote(VoteRequest) returns (JsonDataReply);
 }

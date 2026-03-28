@@ -45,13 +45,19 @@ type BusinessServiceClient interface {
 	LotteryCategories(ctx context.Context, in *CategoryLibraryRequest, opts ...grpc.CallOption) (*JsonDataReply, error)
 	// LiveScenePage 开奖现场整页聚合接口（单接口返回整页数据）。
 	LiveScenePage(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*JsonDataReply, error)
-	LotteryDashboard(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*JsonDataReply, error)
-	DrawHistory(ctx context.Context, in *DrawHistoryRequest, opts ...grpc.CallOption) (*JsonDataReply, error)
-	DrawDetail(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*JsonDataReply, error)
+	// LotteryDashboard 使用真正的 typed response。
+	LotteryDashboard(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*LotteryDashboardReply, error)
+	// DrawHistory / LotteryHistory 共享同一套 typed 历史结构。
+	DrawHistory(ctx context.Context, in *DrawHistoryRequest, opts ...grpc.CallOption) (*LotteryHistoryReply, error)
+	// DrawDetail 使用真正的 typed response。
+	DrawDetail(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*LotteryDrawDetailReply, error)
 	ListCards(ctx context.Context, in *ListCardsRequest, opts ...grpc.CallOption) (*JsonDataReply, error)
-	LotteryDetail(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*JsonDataReply, error)
-	LotteryHistory(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*JsonDataReply, error)
-	LotteryResults(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*JsonDataReply, error)
+	// LotteryDetail 彩票详情页使用 typed response。
+	LotteryDetail(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*LotteryDetailReply, error)
+	// LotteryHistory 共享历史开奖记录 typed response。
+	LotteryHistory(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*LotteryHistoryReply, error)
+	// LotteryResults 当前与 LotteryDetail 复用同一 typed 结构。
+	LotteryResults(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*LotteryDetailReply, error)
 	VoteRecord(ctx context.Context, in *VoteRecordRequest, opts ...grpc.CallOption) (*JsonDataReply, error)
 	Vote(ctx context.Context, in *VoteRequest, opts ...grpc.CallOption) (*JsonDataReply, error)
 }
@@ -94,9 +100,9 @@ func (c *businessServiceClient) LiveScenePage(ctx context.Context, in *IDRequest
 	return out, nil
 }
 
-func (c *businessServiceClient) LotteryDashboard(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*JsonDataReply, error) {
+func (c *businessServiceClient) LotteryDashboard(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*LotteryDashboardReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(JsonDataReply)
+	out := new(LotteryDashboardReply)
 	err := c.cc.Invoke(ctx, BusinessService_LotteryDashboard_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -104,9 +110,9 @@ func (c *businessServiceClient) LotteryDashboard(ctx context.Context, in *IDRequ
 	return out, nil
 }
 
-func (c *businessServiceClient) DrawHistory(ctx context.Context, in *DrawHistoryRequest, opts ...grpc.CallOption) (*JsonDataReply, error) {
+func (c *businessServiceClient) DrawHistory(ctx context.Context, in *DrawHistoryRequest, opts ...grpc.CallOption) (*LotteryHistoryReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(JsonDataReply)
+	out := new(LotteryHistoryReply)
 	err := c.cc.Invoke(ctx, BusinessService_DrawHistory_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -114,9 +120,9 @@ func (c *businessServiceClient) DrawHistory(ctx context.Context, in *DrawHistory
 	return out, nil
 }
 
-func (c *businessServiceClient) DrawDetail(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*JsonDataReply, error) {
+func (c *businessServiceClient) DrawDetail(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*LotteryDrawDetailReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(JsonDataReply)
+	out := new(LotteryDrawDetailReply)
 	err := c.cc.Invoke(ctx, BusinessService_DrawDetail_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -134,9 +140,9 @@ func (c *businessServiceClient) ListCards(ctx context.Context, in *ListCardsRequ
 	return out, nil
 }
 
-func (c *businessServiceClient) LotteryDetail(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*JsonDataReply, error) {
+func (c *businessServiceClient) LotteryDetail(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*LotteryDetailReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(JsonDataReply)
+	out := new(LotteryDetailReply)
 	err := c.cc.Invoke(ctx, BusinessService_LotteryDetail_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -144,9 +150,9 @@ func (c *businessServiceClient) LotteryDetail(ctx context.Context, in *IDRequest
 	return out, nil
 }
 
-func (c *businessServiceClient) LotteryHistory(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*JsonDataReply, error) {
+func (c *businessServiceClient) LotteryHistory(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*LotteryHistoryReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(JsonDataReply)
+	out := new(LotteryHistoryReply)
 	err := c.cc.Invoke(ctx, BusinessService_LotteryHistory_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -154,9 +160,9 @@ func (c *businessServiceClient) LotteryHistory(ctx context.Context, in *IDReques
 	return out, nil
 }
 
-func (c *businessServiceClient) LotteryResults(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*JsonDataReply, error) {
+func (c *businessServiceClient) LotteryResults(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*LotteryDetailReply, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(JsonDataReply)
+	out := new(LotteryDetailReply)
 	err := c.cc.Invoke(ctx, BusinessService_LotteryResults_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -196,13 +202,19 @@ type BusinessServiceServer interface {
 	LotteryCategories(context.Context, *CategoryLibraryRequest) (*JsonDataReply, error)
 	// LiveScenePage 开奖现场整页聚合接口（单接口返回整页数据）。
 	LiveScenePage(context.Context, *IDRequest) (*JsonDataReply, error)
-	LotteryDashboard(context.Context, *IDRequest) (*JsonDataReply, error)
-	DrawHistory(context.Context, *DrawHistoryRequest) (*JsonDataReply, error)
-	DrawDetail(context.Context, *IDRequest) (*JsonDataReply, error)
+	// LotteryDashboard 使用真正的 typed response。
+	LotteryDashboard(context.Context, *IDRequest) (*LotteryDashboardReply, error)
+	// DrawHistory / LotteryHistory 共享同一套 typed 历史结构。
+	DrawHistory(context.Context, *DrawHistoryRequest) (*LotteryHistoryReply, error)
+	// DrawDetail 使用真正的 typed response。
+	DrawDetail(context.Context, *IDRequest) (*LotteryDrawDetailReply, error)
 	ListCards(context.Context, *ListCardsRequest) (*JsonDataReply, error)
-	LotteryDetail(context.Context, *IDRequest) (*JsonDataReply, error)
-	LotteryHistory(context.Context, *IDRequest) (*JsonDataReply, error)
-	LotteryResults(context.Context, *IDRequest) (*JsonDataReply, error)
+	// LotteryDetail 彩票详情页使用 typed response。
+	LotteryDetail(context.Context, *IDRequest) (*LotteryDetailReply, error)
+	// LotteryHistory 共享历史开奖记录 typed response。
+	LotteryHistory(context.Context, *IDRequest) (*LotteryHistoryReply, error)
+	// LotteryResults 当前与 LotteryDetail 复用同一 typed 结构。
+	LotteryResults(context.Context, *IDRequest) (*LotteryDetailReply, error)
 	VoteRecord(context.Context, *VoteRecordRequest) (*JsonDataReply, error)
 	Vote(context.Context, *VoteRequest) (*JsonDataReply, error)
 	mustEmbedUnimplementedBusinessServiceServer()
@@ -224,25 +236,25 @@ func (UnimplementedBusinessServiceServer) LotteryCategories(context.Context, *Ca
 func (UnimplementedBusinessServiceServer) LiveScenePage(context.Context, *IDRequest) (*JsonDataReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method LiveScenePage not implemented")
 }
-func (UnimplementedBusinessServiceServer) LotteryDashboard(context.Context, *IDRequest) (*JsonDataReply, error) {
+func (UnimplementedBusinessServiceServer) LotteryDashboard(context.Context, *IDRequest) (*LotteryDashboardReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method LotteryDashboard not implemented")
 }
-func (UnimplementedBusinessServiceServer) DrawHistory(context.Context, *DrawHistoryRequest) (*JsonDataReply, error) {
+func (UnimplementedBusinessServiceServer) DrawHistory(context.Context, *DrawHistoryRequest) (*LotteryHistoryReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method DrawHistory not implemented")
 }
-func (UnimplementedBusinessServiceServer) DrawDetail(context.Context, *IDRequest) (*JsonDataReply, error) {
+func (UnimplementedBusinessServiceServer) DrawDetail(context.Context, *IDRequest) (*LotteryDrawDetailReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method DrawDetail not implemented")
 }
 func (UnimplementedBusinessServiceServer) ListCards(context.Context, *ListCardsRequest) (*JsonDataReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListCards not implemented")
 }
-func (UnimplementedBusinessServiceServer) LotteryDetail(context.Context, *IDRequest) (*JsonDataReply, error) {
+func (UnimplementedBusinessServiceServer) LotteryDetail(context.Context, *IDRequest) (*LotteryDetailReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method LotteryDetail not implemented")
 }
-func (UnimplementedBusinessServiceServer) LotteryHistory(context.Context, *IDRequest) (*JsonDataReply, error) {
+func (UnimplementedBusinessServiceServer) LotteryHistory(context.Context, *IDRequest) (*LotteryHistoryReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method LotteryHistory not implemented")
 }
-func (UnimplementedBusinessServiceServer) LotteryResults(context.Context, *IDRequest) (*JsonDataReply, error) {
+func (UnimplementedBusinessServiceServer) LotteryResults(context.Context, *IDRequest) (*LotteryDetailReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method LotteryResults not implemented")
 }
 func (UnimplementedBusinessServiceServer) VoteRecord(context.Context, *VoteRecordRequest) (*JsonDataReply, error) {

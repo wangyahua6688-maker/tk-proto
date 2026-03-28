@@ -37,7 +37,7 @@ const file_tk_v1_user_service_proto_rawDesc = "" +
 	"\n" +
 	"LoginBySMS\x12\x1a.tk.v1.AuthSMSLoginRequest\x1a\x14.tk.v1.JsonDataReply\x12:\n" +
 	"\aProfile\x12\x19.tk.v1.AuthProfileRequest\x1a\x14.tk.v1.JsonDataReply\x12P\n" +
-	"\x14LotteryCommentGroups\x12\".tk.v1.LotteryCommentGroupsRequest\x1a\x14.tk.v1.JsonDataReplyB\x1cZ\x1atk-proto/gen/go/tk/v1;tkv1b\x06proto3"
+	"\x14LotteryCommentGroups\x12\".tk.v1.LotteryCommentGroupsRequest\x1a\x14.tk.v1.JsonDataReplyB;Z9github.com/wangyahua6688-maker/tk-proto/gen/go/tk/v1;tkv1b\x06proto3"
 
 var file_tk_v1_user_service_proto_goTypes = []any{
 	(*TopicListRequest)(nil),            // 0: tk.v1.TopicListRequest

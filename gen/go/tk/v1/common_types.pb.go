@@ -1133,7 +1133,7 @@ const file_tk_v1_common_types_proto_rawDesc = "" +
 	"\x05phone\x18\x01 \x01(\tR\x05phone\x12\x19\n" +
 	"\bsms_code\x18\x02 \x01(\tR\asmsCode\"7\n" +
 	"\x12AuthProfileRequest\x12!\n" +
-	"\faccess_token\x18\x01 \x01(\tR\vaccessTokenB\x1cZ\x1atk-proto/gen/go/tk/v1;tkv1b\x06proto3"
+	"\faccess_token\x18\x01 \x01(\tR\vaccessTokenB;Z9github.com/wangyahua6688-maker/tk-proto/gen/go/tk/v1;tkv1b\x06proto3"
 
 var (
 	file_tk_v1_common_types_proto_rawDescOnce sync.Once
